@@ -10,7 +10,6 @@
 
 static int get_number(ErlNifEnv* env, ERL_NIF_TERM term, double* dp);
 
-/* vector_in_polygon(lat, lng, polygon_size, [[lat, lng], [lat, lng], ..., [lat, lng]]) */
 static ERL_NIF_TERM user_in_region(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
   if (argc < 4) {
