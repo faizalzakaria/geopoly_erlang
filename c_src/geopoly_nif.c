@@ -16,8 +16,8 @@ static ERL_NIF_TERM user_in_region(ErlNifEnv* env, int argc, const ERL_NIF_TERM 
     goto badarg;
   }
 
+  GP_Polygon polygon = {0};
   GP_Point point;
-  GP_Polygon polygon;
   unsigned ret;
 
   // User location

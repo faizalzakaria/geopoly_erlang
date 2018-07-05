@@ -7,8 +7,6 @@
 #ifndef GP_GEOPOPY_H
 #define GP_GEOPOPY_H
 
-#include <stddef.h>
-
 // Defualt maximum geodesic line segment length in m
 const double GP_GEO_LINE_SEGMENT_LENGTH = 5000.0;
 
