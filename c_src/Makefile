@@ -22,6 +22,8 @@ ifeq ($(UNAME_SYS), darwin)
 				-Wl,-U,_enif_get_list_cell \
 				-Wl,-U,_enif_get_resource \
 				-Wl,-U,_enif_get_tuple \
+				-Wl,-U,_enif_get_double \
+				-Wl,-U,_enif_get_long \
 				-Wl,-U,_enif_make_atom \
 				-Wl,-U,_enif_make_badarg \
 				-Wl,-U,_enif_make_existing_atom \

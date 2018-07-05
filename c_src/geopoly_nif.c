@@ -8,38 +8,73 @@
 
 #include "geopoly.h"
 
+static int get_number(ErlNifEnv* env, ERL_NIF_TERM term, double* dp);
+
 /* vector_in_polygon(lat, lng, polygon_size, [[lat, lng], [lat, lng], ..., [lat, lng]]) */
 static ERL_NIF_TERM user_in_region(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
-  unsigned polygon_size;
+  if (argc < 4) {
+    goto badarg;
+  }
 
-  if (argc < 1) {
+  GP_Point point;
+  GP_Polygon polygon;
+  unsigned ret;
+
+  // User location
+  if (!get_number(env, argv[0], &point.lat) || !get_number(env, argv[1], &point.lon)) {
     goto badarg;
   }
 
   // Polygon size
-  if (!enif_get_uint(env, argv[0], &polygon_size)) {
+  if (!enif_get_uint(env, argv[2], &polygon.size)) {
     goto badarg;
   }
 
-  GP_Point p = {10.0, 40.0};
-  GP_Point poly_points[] = {
-                            { 0.0,  0.0},
-                            { 0.0, 60.0},
-                            {60.0, 60.0},
-                            {60.0,  0.0},
-  };
+  polygon.data = enif_alloc(sizeof(GP_Point) * polygon.size);
 
-  GP_Polygon poly;
-  poly.data = poly_points;
-  poly.size = 4;
+  // Get the polygon data
+  ERL_NIF_TERM list, row, v;
+  list = argv[3];
 
-  printf("Point {%f %f} is in poly: %d\n", p.lat, p.lon, GP_is_geopoint_in_polygon(p, poly, GP_SPHERE, 0.0));
+  // Polygon
+  for (unsigned i = 0; i < polygon.size; i++) {
+    if (!enif_get_list_cell(env, list, &row, &list)) {
+      goto badarg;
+    }
 
-  return enif_make_uint(env, 1);
+    if (!enif_get_list_cell(env, row, &v, &row) ||
+        !get_number(env, v, &polygon.data[i].lat)) {
+      goto badarg;
+    }
+
+    if (!enif_get_list_cell(env, row, &v, &row) ||
+        !get_number(env, v, &polygon.data[i].lon)) {
+      goto badarg;
+    }
+  }
+
+  ret = GP_is_geopoint_in_polygon(point, polygon, GP_SPHERE, 0.0);
+
+  if (polygon.data != NULL) {
+    enif_free(polygon.data);
+  }
+
+  return enif_make_uint(env, ret);
 
  badarg:
+  if (polygon.data != NULL) {
+    enif_free(polygon.data);
+  }
+
   return enif_make_badarg(env);
+}
+
+static int get_number(ErlNifEnv* env, ERL_NIF_TERM term, double* dp)
+{
+  long i;
+  return enif_get_double(env, term, dp) ||
+    (enif_get_long(env, term, &i) && (*dp=(double)i, 1));
 }
 
 static ErlNifFunc nif_funcs[] =

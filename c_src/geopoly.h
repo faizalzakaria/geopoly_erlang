@@ -23,8 +23,8 @@ typedef struct {
 } GP_Point;
 
 typedef struct {
-  GP_Point *data;
-  size_t size;
+    GP_Point *data;
+    unsigned size;
 } GP_Polygon;
 
 ///
