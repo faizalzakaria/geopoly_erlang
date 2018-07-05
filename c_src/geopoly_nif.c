@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <unistd.h>
 
-#include "GeopolyLib/geopoly.h"
+#include "geopoly.h"
 
 /* vector_in_polygon(lat, lng, polygon_size, [[lat, lng], [lat, lng], ..., [lat, lng]]) */
 static ERL_NIF_TERM user_in_region(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])

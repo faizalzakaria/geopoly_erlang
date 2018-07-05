@@ -38,14 +38,11 @@ endif
 
 CFLAGS += -DNDEBUG \
 			-I $(BASEDIR)/_build/Geographiclib/include \
-			-I $(BASEDIR)/deps \
 			-g -Wextra -Werror -Wno-missing-field-initializers -fno-exceptions -fno-rtti
 
 CXXFLAGS += -DNDEBUG \
 			-I $(BASEDIR)/_build/Geographiclib/include \
-			-I $(BASEDIR)/deps \
 			-g -Wextra -Werror -Wno-missing-field-initializers -fno-rtti -std=c++11
 
-LDFLAGS +=  -L$(BASEDIR)/deps/GeopolyLib \
-      -L$(BASEDIR)/_build/Geographiclib/BUILD/src \
-      -lgeopoly -lGeographic -lstdc++
+LDFLAGS += -L$(BASEDIR)/_build/Geographiclib/BUILD/src \
+      -lGeographic -lstdc++
