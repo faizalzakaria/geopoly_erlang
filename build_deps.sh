@@ -18,7 +18,7 @@ function DownloadGeographiclib()
     local repo=https://git.code.sf.net/p/geographiclib/code
     local rev=majic/release/1.49
 
-	  echo "repo=$REPO rev=$REV"
+	  echo "repo=$repo rev=$rev"
 
 	  mkdir -p $BUILD_LOCATION
 	  pushd $BUILD_LOCATION
