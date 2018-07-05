@@ -1,0 +1,9 @@
+{application, geopoly,
+ [
+  {description, "Erlang Geopoly lib"},
+  {vsn, "1.0"},
+  {modules, []},
+  {registered, []},
+  {applications, [kernel, stdlib]},
+  {env, []}
+ ]}.

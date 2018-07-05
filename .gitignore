@@ -1,0 +1,8 @@
+/.idea/
+/.rebar/
+/ebin/
+/priv/
+*.DS_Store
+*.iml
+/log/
+_build/
