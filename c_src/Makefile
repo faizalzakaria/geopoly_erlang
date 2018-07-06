@@ -40,7 +40,7 @@ endif
 
 CFLAGS += -DNDEBUG \
 			-I $(BASEDIR)/_build/Geographiclib/include \
-			-g -Wextra -Werror -Wno-missing-field-initializers -fno-exceptions -fno-rtti
+			-g -Wextra -Werror -Wno-missing-field-initializers -fno-exceptions
 
 CXXFLAGS += -DNDEBUG \
 			-I $(BASEDIR)/_build/Geographiclib/include \
