@@ -43,7 +43,7 @@ struct Vec2 {
 
 /// Check if point has NANs
 bool isnan(const Vec2 &p) {
-    return isnan(p.x) || isnan(p.y);
+    return std::isnan(p.x) || std::isnan(p.y);
 }
 
 /// Check if geo coordinate lat is in [-90; 90] range
