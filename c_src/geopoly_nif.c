@@ -25,7 +25,7 @@ static ERL_NIF_TERM user_in_region(ErlNifEnv* env, int argc, const ERL_NIF_TERM 
     goto badarg;
   }
 
-  if (point.lat < -180 || point.lat > 180) {
+  if (point.lat < -90 || point.lat > 90) {
     goto badarg;
   }
 
