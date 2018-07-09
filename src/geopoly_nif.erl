@@ -2,14 +2,13 @@
 %%
 -module(geopoly_nif).
 -author('fai@code3.io').
--export([user_in_region/4, hello_world/0]).
+-export([user_in_region/4, test/0]).
 -on_load(load_nif/0).
 
-%% With a large Bin argument, exor/2 and exor_bad take far too long for a NIF
-user_in_region(lat, lng, polygon_size, polygon) ->
+user_in_region(Lat, Lng, Polygon_size, Polygon) ->
     erlang:nif_error({nif_not_loaded, ?MODULE}).
 
-hello_world() -> io:fwrite("hello, world\n").
+test() -> io:fwrite("It works!\n").
 
 load_nif() ->
     SoName = get_nif_library_path(),

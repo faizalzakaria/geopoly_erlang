@@ -25,8 +25,20 @@ static ERL_NIF_TERM user_in_region(ErlNifEnv* env, int argc, const ERL_NIF_TERM 
     goto badarg;
   }
 
+  if (point.lat < -180 || point.lat > 180) {
+    goto badarg;
+  }
+
+  if (point.lon < -180 || point.lon > 180) {
+    goto badarg;
+  }
+
   // Polygon size
   if (!enif_get_uint(env, argv[2], &polygon.size)) {
+    goto badarg;
+  }
+
+  if (polygon.size < 3) {
     goto badarg;
   }
 
