@@ -41,20 +41,21 @@ function BuildGeographiclib()
 	  pushd $BUILD_LOCATION
 	  pushd $GEOGRAPHICLIB_DEST
 
-    case $OS in
-        Darwin)
-            CPP_FLAGS="-msse4.2 -O3"
-            ;;
-        *)
-            CPP_FLAGS="-fPIC -msse4.2 -mpclmul -O3"
-            ;;
-    esac
-
     mkdir -p BUILD
     pushd BUILD
 
-	  fail_check cmake ..
+    fail_check cmake ..
     fail_check cmake -D GEOGRAPHICLIB_LIB_TYPE=STATIC .
+
+    case $OS in
+        Darwin)
+            fail_check cmake -D CMAKE_CXX_FLAGS:STRING="-msse4.2 -O3" .
+            ;;
+        *)
+            fail_check cmake -D CMAKE_CXX_FLAGS:STRING="-fPIC -msse4.2 -mpclmul -O3" .
+            ;;
+    esac
+
 	  fail_check make
 
     popd
