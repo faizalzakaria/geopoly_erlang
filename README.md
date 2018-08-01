@@ -1,4 +1,4 @@
-# erlang_geopoly
+# Geopoly
 Erlang lib geopoly wrapper
 
 ## How to build
